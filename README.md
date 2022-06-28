@@ -1,5 +1,5 @@
 # Glitch
-###### a glitchart toolbox
+## a glitchart toolbox
 
 So far this toolbox consists of a single tool called `glitch`
 
