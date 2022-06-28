@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
                     " -i <in file>\n"
                     " -o <out file>\n"
                     " -s <seed>\n"
-                    " -f <number of bit flips>\n"
+                    " -f <number of bytes to change>\n"
                     " -k <number of bytes to skip>\n",
                     argv[0]);
             exit(EXIT_FAILURE);
