@@ -3,7 +3,7 @@
 
 So far this toolbox consists of a single tool called `glitch`
 
-It applies a bijective version of [Burrows-Wheeler transform](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) (implementation by Yuta Mori, original code [here](https://encode.su/threads/104-libBWT?p=22938&viewfull=1#post22938)) to the provided data, introduces a desired number of errors, and performs an inverse transform.
+It applies [Burrows-Wheeler transform](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) (using [libsais](https://github.com/IlyaGrebnov/libsais) by Ilya Grebnov) to the provided data, introduces a desired number of errors, and performs an inverse transform.
 
 This procedure tends to mix around chunks of data in an interesting way. To achieve best results use uncompressed data with lots of redundancy.
 

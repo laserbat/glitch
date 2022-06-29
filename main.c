@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "bwts.h"
+#include "libsais/src/libsais.h"
 
 #define INITIAL_BUFF_SIZE 512
 
@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
     unsigned char *in_data;
     unsigned char *compressed;
     unsigned char *result;
+    int *temp;
     int size = 0;
     int allocated = 0;
 
@@ -96,13 +97,14 @@ int main(int argc, char **argv) {
 
     compressed = malloc(size);
     result = malloc(size);
+    temp = malloc(size * sizeof(int));
 
     if (compressed == NULL || result == NULL) {
         fprintf(stderr, "Error alocating memory!\n");
         exit(EXIT_FAILURE);
     }
 
-    bwts(&in_data[skip], &compressed[skip], size - skip);
+    int p = libsais_bwt(&in_data[skip], &compressed[skip], temp, size - skip, skip, NULL);
 
     for (int i = 0; i < flips; i++) {
         int location = skip + lrand48() % (size - skip);
@@ -112,7 +114,7 @@ int main(int argc, char **argv) {
         compressed[location2] = temp;
     }
 
-    unbwts(&compressed[skip], &result[skip], size - skip);
+    libsais_unbwt(&compressed[skip], &result[skip], temp, size - skip, NULL, p);
 
     for (int i = 0; i < skip; i++) {
         result[i] = in_data[i];
