@@ -51,6 +51,12 @@ Use `-k` option to avoid corrupting headers of wav or ppm files.
 
 ![example](./example.png)
 
+```
+>>> ./glitch -k 100  -i ~/sample.wav
+```
+
+[Result](./example.ogg) and the [original](https://www.youtube.com/watch?v=9Px-XT-Pg8o), also available as `example.orig.ogg` in this repo.
+
 ## Limitations
 
 This algorithm works on bytes of data, so it's unlikely to produce interesting results when the input consits of multi-byte data (e.g. a stream of 32-bit int values).
