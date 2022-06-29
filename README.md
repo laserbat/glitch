@@ -9,13 +9,15 @@ This procedure tends to mix around chunks of data in an interesting way. To achi
 
 For audio data, I suggest converting it to wav format with unsigned 8-bit PCM encoding. If results are too distorted, you might want to try increasing redundancy by appending multiple copies of the same audio. For images, raw (e.g. not ASCII) PGM works best.
 
+Overall, results are extremely unpredictable so don't expect to always get interesting results.
+
 ```
 Usage: ./glitch [options]
 Options:
  -i <in file>
  -o <out file>
  -s <seed>
- -f <number of bytes to change>
+ -f <number of bytes to swap>
  -k <number of bytes to skip>
 ```
 

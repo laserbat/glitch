@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
                     " -i <in file>\n"
                     " -o <out file>\n"
                     " -s <seed>\n"
-                    " -f <number of bytes to change>\n"
+                    " -f <number of bytes to swap>\n"
                     " -k <number of bytes to skip>\n",
                     argv[0]);
             exit(EXIT_FAILURE);
@@ -106,7 +106,10 @@ int main(int argc, char **argv) {
 
     for (int i = 0; i < flips; i++) {
         int location = skip + lrand48() % (size - skip);
-        compressed[location] += 1;
+        int location2 = skip + lrand48() % (size - skip);
+        int temp = compressed[location];
+        compressed[location] = compressed[location2];
+        compressed[location2] = temp;
     }
 
     unbwts(&compressed[skip], &result[skip], size - skip);
