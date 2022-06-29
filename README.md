@@ -47,7 +47,7 @@ Use `-k` option to avoid corrupting headers of wav or ppm files.
 >>> ./glitch -k 100  -i ~/sample.pgm
 ````
 
-Original and a few variations of the output:
+[Original](http://www.reusableart.com/evening-dress-1881.html) and a few variations of the output:
 
 ![example](./example.png)
 
