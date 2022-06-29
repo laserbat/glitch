@@ -21,7 +21,7 @@ Options:
  -k <number of bytes to skip>
 ```
 
-By default it takes input from stdin, outputs to stdout. Time is used for seeding, one byte is changed and nothing is skipped.
+By default it takes input from stdin, outputs to stdout. Time is used for seeding, one pair of bytes is swapped and nothing is skipped.
 
 Use `-k` option to avoid corrupting headers of wav or ppm files.
 
