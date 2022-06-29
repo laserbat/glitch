@@ -25,7 +25,7 @@ By default it takes input from stdin, outputs to stdout. Time is used for seedin
 
 Use `-k` option to avoid corrupting headers of wav or ppm files.
 
-## Example
+## Examples
 
 ```
 >>> cat > ./sample.txt
@@ -41,6 +41,15 @@ Use `-k` option to avoid corrupting headers of wav or ppm files.
 >>> ./glitch -f10 -i ~/sample.txt
 ```
 > I mwelled foot syphus heastoneggle leays fill itses that nougher entain, is agatomao a ml One, each moun’s ise hight in!hencm niwart. Each ave mine’s burden itst neral forms without flake of to filudes the ms a! Sisyphus the heigine Sit Sit a mountain. One neither syphus ates too cond rockseemusterile of the forth world. The teaches werself futile. But all. This. He towbrd the himagine am of unor gainceg that the gods ands selfidelity that that onights raister strugh to imat happy.
+
+
+````
+>>> ./glitch -k 100  -i ~/sample.pgm
+````
+
+Original and a few variations of the output:
+
+![example](./example.png)
 
 ## Limitations
 
