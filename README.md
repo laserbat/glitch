@@ -3,7 +3,7 @@
 
 So far this toolbox consists of a single tool called `glitch`
 
-It applies [Burrows-Wheeler transform](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) (using [libsais](https://github.com/IlyaGrebnov/libsais) by Ilya Grebnov) to the provided data, introduces a desired number of errors, and performs an inverse transform.
+It applies [Burrows-Wheeler transform](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) (using [libsais](https://github.com/IlyaGrebnov/libsais) by Ilya Grebnov) to the provided data, adds the desired amount of randomness to the primary index, and performs the inverse transform.
 
 This procedure tends to mix around chunks of data in an interesting way. To achieve best results use uncompressed data with lots of redundancy.
 
@@ -17,11 +17,11 @@ Options:
  -i <in file>
  -o <out file>
  -s <seed>
- -f <number of bytes to swap>
+ -l <level of glitching 0-1000>
  -k <number of bytes to skip>
 ```
 
-By default it takes input from stdin, outputs to stdout. Time is used for seeding, one pair of bytes is swapped and nothing is skipped.
+By default it takes input from stdin, outputs to stdout. Time is used for seeding, level is set to 10 and nothing is skipped.
 
 Use `-k` option to avoid corrupting headers of wav or ppm files.
 

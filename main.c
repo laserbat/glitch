@@ -11,7 +11,7 @@
 int main(int argc, char **argv) {
     int seed = time(NULL);
     int skip = 0;
-    int flips = 1;
+    double level = 10;
 
     unsigned char *in_data;
     unsigned char *compressed;
@@ -19,11 +19,12 @@ int main(int argc, char **argv) {
     int *temp;
     int size = 0;
     int allocated = 0;
+    int primary_index;
 
     FILE *in = stdin, *out = stdout;
 
     int opt;
-    while ((opt = getopt(argc, argv, ":i:o:s:f:k:")) != -1) {
+    while ((opt = getopt(argc, argv, ":i:o:s:l:k:")) != -1) {
         switch (opt) {
         case 's':
             seed = strtoul(optarg, NULL, 10);
@@ -42,8 +43,12 @@ int main(int argc, char **argv) {
                 exit(EXIT_FAILURE);
             }
             break;
-        case 'f':
-            flips = strtoul(optarg, NULL, 10);
+        case 'l':
+            level = strtoul(optarg, NULL, 10);
+            if (level < 0)
+                level = 0;
+            if (level > 1000)
+                level = 1000;
             break;
         case 'k':
             skip = strtoul(optarg, NULL, 10);
@@ -55,12 +60,14 @@ int main(int argc, char **argv) {
                     " -i <in file>\n"
                     " -o <out file>\n"
                     " -s <seed>\n"
-                    " -f <number of bytes to swap>\n"
+                    " -l <level of glitching 0-1000>\n"
                     " -k <number of bytes to skip>\n",
                     argv[0]);
             exit(EXIT_FAILURE);
         }
     }
+
+    level /= 1000;
 
     srand48(seed);
 
@@ -104,17 +111,14 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-    int p = libsais_bwt(&in_data[skip], &compressed[skip], temp, size - skip, skip, NULL);
+    primary_index = libsais_bwt(&in_data[skip], &compressed[skip], temp, size - skip, skip, NULL);
 
-    for (int i = 0; i < flips; i++) {
-        int location = skip + lrand48() % (size - skip);
-        int location2 = skip + lrand48() % (size - skip);
-        int temp = compressed[location];
-        compressed[location] = compressed[location2];
-        compressed[location2] = temp;
-    }
+    primary_index = primary_index * (1 - level) + ((drand48() - 0.5) * (size - skip)) * level;
 
-    libsais_unbwt(&compressed[skip], &result[skip], temp, size - skip, NULL, p);
+    primary_index += size - skip;
+    primary_index %= size - skip;
+
+    libsais_unbwt(&compressed[skip], &result[skip], temp, size - skip, NULL, primary_index);
 
     for (int i = 0; i < skip; i++) {
         result[i] = in_data[i];
