@@ -129,6 +129,7 @@ int main(int argc, char **argv) {
     free(in_data);
     free(compressed);
     free(result);
+    free(temp);
 
     fclose(in);
     fclose(out);
